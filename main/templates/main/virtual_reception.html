@@ -1,0 +1,114 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="container mb-5">
+    <div class="card shadow-sm border-0 mt-3">
+        <div class="card-body p-4 p-md-5">
+            
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-success text-center fw-bold">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <h2 class="text-center text-danger fw-bold mb-2">Виртуальная приёмная</h2>
+            <h3 class="text-center text-danger fw-bold mb-4">Первого городского общеобразовательного IT-лицея</h3>
+
+            <hr class="mb-4">
+
+            <div class="mb-5 text-dark" style="font-size: 1.05rem;">
+                <p>Уважаемые посетители "виртуальной приемной"!</p>
+                <p>Пожалуйста, прежде чем отправить письмо в электронном виде, внимательно ознакомьтесь со следующей информацией.</p>
+                <ol>
+                    <li class="mb-2">Обращение, поступившее в электронном виде на официальный сайт Первого лицея, рассматривается в течение одного дня.</li>
+                    <li class="mb-2">Перед отправкой электронного обращения необходимо корректно заполнить все поля.</li>
+                    <li class="mb-2">Ответ автору обращения направляется в форме электронного документа по адресу электронной почты, указанному в обращении;</li>
+                    <li class="mb-2">Обращение не принимается к рассмотрению, если:
+                        <ul>
+                            <li>указан неполный или недостоверный почтовый адрес;</li>
+                            <li>в нем содержится высказывания, оскорбляющие честь и достоинство сотрудников и учащихся Первого лицея;</li>
+                        </ul>
+                    </li>
+                </ol>
+            </div>
+
+            <h5 class="text-center text-primary fw-bold mb-4 text-uppercase">Заполните, пожалуйста, данные о себе и сделайте заявление</h5>
+
+            <form method="post" class="mx-auto" style="max-width: 600px;">
+                {% csrf_token %}
+                
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-4 text-md-end">
+                        <label class="form-label fw-bold mb-0" style="font-size: 1.1rem;">ФИО<span class="text-danger">*</span>:</label>
+                    </div>
+                    <div class="col-md-8">
+                        {{ form.name }}
+                        {% if form.name.errors %}
+                            <div class="invalid-feedback d-block fw-bold">{{ form.name.errors.0 }}</div>
+                            <script>document.getElementById("{{ form.name.id_for_label }}").classList.add("is-invalid");</script>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-4 text-md-end">
+                        <label class="form-label fw-bold mb-0" style="font-size: 1.1rem;">Адрес, телефон<span class="text-danger">*</span>:</label>
+                    </div>
+                    <div class="col-md-8">
+                        {{ form.contact_info }}
+                        {% if form.contact_info.errors %}
+                            <div class="invalid-feedback d-block fw-bold">{{ form.contact_info.errors.0 }}</div>
+                            <script>document.getElementById("{{ form.contact_info.id_for_label }}").classList.add("is-invalid");</script>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row mb-3 align-items-center">
+                    <div class="col-md-4 text-md-end">
+                        <label class="form-label fw-bold mb-0" style="font-size: 1.1rem;">E-mail<span class="text-danger">*</span>:</label>
+                    </div>
+                    <div class="col-md-8">
+                        {{ form.email }}
+                        {% if form.email.errors %}
+                            <div class="invalid-feedback d-block fw-bold">{{ form.email.errors.0 }}</div>
+                            <script>document.getElementById("{{ form.email.id_for_label }}").classList.add("is-invalid");</script>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-4 text-md-end">
+                        <label class="form-label fw-bold mt-2" style="font-size: 1.1rem;">Ваше заявление<span class="text-danger">*</span>:</label>
+                    </div>
+                    <div class="col-md-8">
+                        {{ form.message }}
+                        {% if form.message.errors %}
+                            <div class="invalid-feedback d-block fw-bold">{{ form.message.errors.0 }}</div>
+                            <script>document.getElementById("{{ form.message.id_for_label }}").classList.add("is-invalid");</script>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="row mb-4 align-items-center">
+                    <div class="col-md-4 text-md-end">
+                        <label class="form-label fw-bold mb-0" style="font-size: 1.1rem;">Введите код<br>указанный на картинке<span class="text-danger">*</span>:</label>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="bg-secondary text-white text-center fw-bold fs-4 py-2 mb-2 rounded" style="letter-spacing: 5px; width: 150px; background-image: url('https://www.transparenttextures.com/patterns/noise-lines.png');">
+                            50645
+                        </div>
+                        <input type="text" class="form-control" style="width: 150px;" required placeholder="Код с картинки">
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-8 offset-md-4">
+                        <button type="submit" class="btn btn-light border border-secondary shadow-sm px-4">Отправить</button>
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

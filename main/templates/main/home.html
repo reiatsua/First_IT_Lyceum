@@ -1,0 +1,20 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+    <h2 class="mb-4 text-center">Новости Лицея</h2>
+    <div class="row">
+        {% for news in news_list %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ news.title }}</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">{{ news.created_at|date:"d.m.Y" }}</h6>
+                    <p class="card-text">{{ news.content|truncatewords:30 }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center text-muted">Новостей пока нет.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

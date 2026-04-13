@@ -1,0 +1,83 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card shadow border-0">
+            <div class="card-header bg-primary text-white text-center py-4">
+                <h3 class="mb-0">Личный кабинет</h3>
+            </div>
+            <div class="card-body p-4">
+                <div class="text-center mb-4">
+                    {% if user.avatar %}
+                        <img src="{{ user.avatar.url }}" alt="Аватар" class="rounded-circle shadow-sm" style="width: 120px; height: 120px; object-fit: cover; border: 3px solid #f8f9fa;">
+                    {% else %}
+                        <div class="rounded-circle bg-secondary text-white d-inline-flex justify-content-center align-items-center shadow-sm" style="width: 120px; height: 120px; font-size: 3rem;">
+                            {{ user.first_name|first|upper }}
+                        </div>
+                    {% endif %}
+                    <h4 class="mt-3">{{ user.first_name }} {{ user.last_name }}</h4>
+                    <span class="badge bg-info text-dark">{{ user.get_role_display }}</span>
+                </div>
+
+                <hr>
+
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% for field in form %}
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">{{ field.label }}</label>
+                            {{ field }}
+                            {% if field.errors %}
+                                <div class="text-danger small">{{ field.errors }}</div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    
+                    <div class="d-grid gap-2 mt-4">
+                        <button type="submit" class="btn btn-success">Сохранить изменения</button>
+                    </div>
+                </form>
+
+                {% if user.role == 'student' %}
+                <div class="card mt-4 shadow-sm border-primary">
+                    <div class="card-body text-center">
+                        <h5 class="fw-bold mb-3 text-primary">🤖 Умный Telegram-бот</h5>
+                        
+                        {% if user.telegram_chat_id %}
+                            <div class="alert alert-success mb-0 fw-bold">
+                                ✅ Твой Telegram успешно привязан! Теперь ты будешь получать уведомления.
+                            </div>
+                        {% else %}
+                            <p class="text-muted">Привяжи Telegram, чтобы получать расписание и уведомления прямо в мессенджер.</p>
+                            
+                            {% if user.telegram_sync_code %}
+                                <div class="alert alert-warning">
+                                    Твой код для привязки:<br>
+                                    <strong class="fs-1 text-dark" style="letter-spacing: 5px;">{{ user.telegram_sync_code }}</strong><br>
+                                    <small class="mt-2 d-block">Отправь этот код боту <b>@flyceum_student_bot</b></small>
+                                </div>
+                            {% else %}
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <button type="submit" name="generate_tg_code" class="btn btn-outline-primary fw-bold">
+                                        Сгенерировать код привязки
+                                    </button>
+                                </form>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="mt-5 border-top pt-3">
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-outline-danger w-100">Выйти из аккаунта</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
