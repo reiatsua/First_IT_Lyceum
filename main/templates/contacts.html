@@ -81,6 +81,37 @@
         background: #0d6efd;
         color: white;
     }
+    .social-link {
+        width: 54px;
+        height: 54px;
+        background: #ffffff;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 10px;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        border: 1px solid #f1f5f9;
+        overflow: hidden;
+    }
+
+    .social-logo {
+        width: 28px;
+        height: 28px;
+        object-fit: contain;
+        transition: transform 0.3s ease;
+    }
+
+    .social-link:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        border-color: #0d6efd;
+    }
+
+    .social-link:hover .social-logo {
+        transform: scale(1.1);
+    }
 </style>
 
 <div class="container contacts-container">
@@ -127,16 +158,24 @@
                         </div>
                         
                         <div class="mt-4 text-center">
-                            <span class="contact-label">Мы в соцсетях</span>
+                            <span class="contact-label d-block mb-3">Мы в соцсетях</span>
                             <div class="d-flex justify-content-center">
-                                <a href="https://www.instagram.com/flyceum.petro" class="social-link" target="_blank">
-                                    <i class="bi bi-instagram"></i>
+                                <a href="https://www.instagram.com/flyceum.petro?igsh=eTBmNXBmMXB6Ympu" 
+                                class="social-link" target="_blank">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+                                        alt="Instagram" class="social-logo">
                                 </a>
-                                <a href="https://www.facebook.com/share/18KGe7BPqH/" class="social-link" target="_blank">
-                                    <i class="bi bi-facebook"></i>
+                                
+                                <a href="https://www.facebook.com/share/18KGe7BPqH/" 
+                                class="social-link" target="_blank">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Facebook_Logo_2023.svg" 
+                                        alt="Facebook" class="social-logo">
                                 </a>
-                                <a href="https://www.youtube.com/@ПервыйлицейПетропавловск" class="social-link" target="_blank">
-                                    <i class="bi bi-youtube"></i>
+                                
+                                <a href="https://www.youtube.com/@ПервыйлицейПетропавловск" 
+                                class="social-link" target="_blank">
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg" 
+                                        alt="YouTube" class="social-logo">
                                 </a>
                             </div>
                         </div>
