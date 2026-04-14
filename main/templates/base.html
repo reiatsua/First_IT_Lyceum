@@ -19,8 +19,22 @@
         
         /* Увеличили отступ, так как шапка стала выше */
         body {
-            padding-top: 130px; 
+            background-image: url("{% static 'images/spiral.jpg' %}");
+        
+        /* Чтобы картинка не двигалась при скролле */
+            background-attachment: fixed;
+            
+            /* Чтобы картинка растягивалась на весь экран без искажений */
+            background-size: cover;
+            
+            /* Центрируем фон */
+            background-position: center;
+            
+            /* Цвет фона на случай, если картинка долго грузится */
             background-color: #f8f9fa;
+            
+            /* Чтобы фон не повторялся, если картинка маленькая */
+            background-repeat: no-repeat;
         }
 
         .hover-shadow:hover {
