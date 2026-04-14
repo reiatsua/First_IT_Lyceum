@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import News, Page, Appeal, BookAnniversary, SiteSettings, TeacherCategory
+from .models import News, Page, Appeal, BookAnniversary, SiteSettings, Teacher, TeacherCategory
 
 from .forms import AppealForm
 
@@ -31,6 +31,9 @@ def page_detail(request, slug):
         return render(request, 'symbols_lyceum.html')
     elif slug == 'weather-cancel':
         return render(request, 'weather_cancel.html')
+    elif slug == 'teachers':
+        teachers = Teacher.objects.all()
+        return render(request, 'teachers.html', {'teachers': teachers})
     page = get_object_or_404(Page, slug=slug)
     return render(request, 'page.html', {'page': page})
 
