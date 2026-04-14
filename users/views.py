@@ -14,7 +14,10 @@ def register_view(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST) # Берем данные из POST
         if form.is_valid():
-            user = form.save()
+            user = form.save(commit=False)
+            user.username = user.email 
+            
+            user.save()
             login(request, user)
             messages.success(request, 'Добро пожаловать! Регистрация прошла успешно.')
             return redirect('home')
