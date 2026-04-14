@@ -10,8 +10,7 @@
     <style>
         body {
             padding-top: 130px; 
-            background-color: #f8f9fa; /* Чистый светло-серый фон */
-            color: #212529;
+            background-color: #f4f7f6;
         }
 
         #main-header {
@@ -21,41 +20,30 @@
             transition: transform 0.3s ease-in-out;
             z-index: 1030;
             background-color: #ffffff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        /* Контентная область теперь на чистом фоне без размытия */
         main.container {
             background-color: #ffffff;
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            border-radius: 1.5rem;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            min-height: 80vh;
         }
 
-        .hover-shadow:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1) !important;
-            background-color: #f1f8ff !important;
-        }
-        
-        .transition { transition: all 0.2s ease-in-out; }
-
-        /* Навигация */
+        /* Навигация (Десктоп) */
         .school-nav .nav-link {
             color: #495057;
             font-weight: 500;
-            padding: 0.5rem 1.2rem;
+            padding: 0.5rem 1rem;
             margin: 0 0.1rem;
             transition: all 0.2s;
             white-space: nowrap;
         }
 
-        .school-nav .nav-link:hover {
-            color: #0d6efd;
-            background-color: #f1f5f9;
-        }
+        .school-nav .dropdown-toggle::after { display: none; }
 
-        /* Выпадающее меню при наведении (Десктоп) */
         @media (min-width: 992px) {
             .hover-dropdown:hover .dropdown-menu {
                 display: block !important;
@@ -64,12 +52,9 @@
             }
         }
 
-        /* Адаптация под мобильные */
         @media (max-width: 991px) {
-            body { padding-top: 90px; }
-            .school-nav { display: none !important; } 
-            main.container { padding: 20px; border-radius: 0; box-shadow: none; background-color: transparent; }
-            .navbar-brand-text { font-size: 0.95rem !important; }
+            body { padding-top: 85px; }
+            .school-nav-wrapper { display: none !important; }
         }
 
         @keyframes fadeIn {
@@ -78,97 +63,102 @@
         }
 
         .dropdown-menu {
-            border-radius: 12px;
-            border: 1px solid #eee;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            border-radius: 1rem;
+            border: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
 
-        /* Боковое меню */
-        .offcanvas {
-            width: 300px !important;
-            border-right: none;
+        /* Оформление мобильного меню */
+        .offcanvas { width: 300px !important; }
+        .mobile-nav-link {
+            font-weight: 600;
+            color: #1e293b;
+            padding: 12px 15px !important;
+            border-radius: 10px;
         }
-        .offcanvas .nav-link {
-            font-size: 1.05rem;
-            padding: 12px 20px;
-            border-radius: 8px;
-            margin-bottom: 5px;
-            color: #334155;
+        .mobile-dropdown-menu {
+            border-left: 3px solid #0d6efd;
+            margin-left: 20px;
+            background: #f8f9fa;
         }
     </style>
 </head>
 <body>
 
     <header id="main-header">
-        <div class="container py-2 d-flex align-items-center justify-content-between">
+        <div class="container py-2 d-flex align-items-center">
             
-            <button class="navbar-toggler d-lg-none btn btn-outline-light text-dark border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
-                <i class="bi bi-list fs-2"></i>
+            <button class="navbar-toggler d-lg-none btn btn-light rounded-circle shadow-sm me-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu">
+                <i class="bi bi-list fs-3"></i>
             </button>
 
-            <div class="text-center flex-grow-1 mx-2">
-                <a href="{% url 'home' %}" class="text-decoration-none d-inline-block">
-                    <span class="fw-bold text-primary navbar-brand-text" style="font-size: 1.15rem; line-height: 1.2; letter-spacing: -0.5px;">
+            <div class="text-center flex-grow-1">
+                <a href="{% url 'home' %}" class="text-decoration-none">
+                    <span class="fw-bold text-primary" style="font-size: 1.1rem; line-height: 1.2;">
                         КГУ "ПЕРВЫЙ IT-ЛИЦЕЙ"<br>
-                        <small class="text-muted fw-normal d-none d-sm-block" style="font-size: 0.8rem; letter-spacing: 0;">г. Петропавловск</small>
+                        <small class="text-muted fw-normal d-none d-sm-block" style="font-size: 0.85rem;">г. Петропавловск</small>
                     </span>
                 </a>
             </div>
             
-            <div class="ms-auto">
+            <div class="ms-3">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'profile' %}" class="d-flex align-items-center text-decoration-none border rounded-pill py-1 px-2 px-sm-3 bg-white shadow-sm hover-shadow transition">
+                    <a href="{% url 'profile' %}" class="d-flex align-items-center text-decoration-none border rounded-pill py-1 px-2 px-sm-3 bg-white shadow-sm transition">
                         {% if user.avatar %}
-                            <img src="{{ user.avatar.url }}" alt="Аватар" width="32" height="32" class="rounded-circle me-sm-2" style="object-fit: cover;">
+                            <img src="{{ user.avatar.url }}" width="32" height="32" class="rounded-circle me-sm-2">
                         {% else %}
-                            <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center me-sm-2" style="width: 32px; height: 32px; font-weight: bold; font-size: 0.8rem;">
+                            <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center me-sm-2" style="width: 32px; height: 32px;">
                                 {{ user.first_name|first|upper }}
                             </div>
                         {% endif %}
-                        <span class="text-dark fw-medium d-none d-md-inline small">
-                            {{ user.first_name }}
-                        </span>
+                        <span class="text-dark fw-medium d-none d-md-inline small">{{ user.first_name }}</span>
                     </a>
                 {% else %}
-                    <a href="{% url 'login' %}" class="btn btn-primary btn-sm px-4 rounded-pill fw-bold">Войти</a>
+                    <a href="{% url 'login' %}" class="btn btn-primary btn-sm px-4 rounded-pill">Войти</a>
                 {% endif %}
             </div>
         </div>
 
-        <div class="bg-white border-top d-none d-lg-block">
+        <div class="bg-white border-top school-nav-wrapper">
             <div class="container">
-                <nav class="nav nav-pills school-nav py-2 justify-content-center">
+                <nav class="nav nav-pills school-nav py-1 justify-content-center">
+                    
                     <div class="nav-item dropdown hover-dropdown">
                         <a class="nav-link dropdown-toggle rounded-pill" href="#">🏛 Музей</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'mudryj-uchitel' %}">Мудрый и добрый учитель...</a></li>
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'nemnogo-istorii' %}">Немного истории</a></li>
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'our-pride' %}">Наша гордость</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'mudryj-uchitel' %}">Мудрый учитель...</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'nemnogo-istorii' %}">Немного истории</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'our-pride' %}">Наша гордость</a></li>
                         </ul>
                     </div>
+
                     <div class="nav-item dropdown hover-dropdown">
                         <a class="nav-link dropdown-toggle rounded-pill" href="#">📚 Библиотека</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'bibliotechnaya-dokumentaciya' %}">Библиотечная документация</a></li>
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'books-jubilee' %}">Книги юбиляры</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'bibliotechnaya-dokumentaciya' %}">Документация</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'books-jubilee' %}">Книги юбиляры</a></li>
                         </ul>
                     </div>
+
                     <div class="nav-item dropdown hover-dropdown">
                         <a class="nav-link dropdown-toggle rounded-pill" href="#">ℹ️ Информация</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'simvolika' %}">Символика лицея</a></li>
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'weather-cancel' %}">Об отмене занятий</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'simvolika' %}">Символика лицея</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'weather-cancel' %}">Об отмене занятий</a></li>
                         </ul>
                     </div>
+
                     <div class="nav-item dropdown hover-dropdown">
                         <a class="nav-link dropdown-toggle rounded-pill" href="#">🎓 Учебный кабинет</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'teachers' %}">Наши педагоги</a></li>
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'psychology' %}">Психологическая служба</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'teachers' %}">Наши педагоги</a></li>
+                            <li><a class="dropdown-item" href="{% url 'page_detail' 'psychology' %}">Психолог</a></li>
                         </ul>
                     </div>
+
                     <a class="nav-link rounded-pill" href="{% url 'virtual_reception' %}">💻 Приемная</a>
                     <a class="nav-link rounded-pill" href="{% url 'page_detail' 'contacts' %}">📞 Контакты</a>
+
                 </nav>
             </div>
         </div>
@@ -176,41 +166,61 @@
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
         <div class="offcanvas-header border-bottom">
-            <h5 class="offcanvas-title fw-bold text-primary">Навигация</h5>
+            <h5 class="offcanvas-title fw-bold text-primary">Меню лицея</h5>
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
         </div>
         <div class="offcanvas-body p-0">
             <div class="list-group list-group-flush">
-                <a href="{% url 'home' %}" class="list-group-item list-group-item-action py-3 border-0">🏠 Главная страница</a>
                 
-                <div class="p-3 bg-light fw-bold small text-uppercase text-muted" style="letter-spacing: 1px;">Разделы</div>
-                
-                <a class="list-group-item list-group-item-action border-0 py-3" data-bs-toggle="collapse" href="#collapseMuseum">🏛 Музей лицейской славы</a>
-                <div class="collapse" id="collapseMuseum">
-                    <div class="bg-light ps-4">
-                        <a class="list-group-item list-group-item-action bg-transparent border-0" href="{% url 'page_detail' 'mudryj-uchitel' %}">Учитель...</a>
-                        <a class="list-group-item list-group-item-action bg-transparent border-0" href="{% url 'page_detail' 'nemnogo-istorii' %}">История</a>
-                        <a class="list-group-item list-group-item-action bg-transparent border-0" href="{% url 'page_detail' 'our-pride' %}">Гордость</a>
+                <div class="list-group-item border-0 p-0">
+                    <a class="nav-link mobile-nav-link dropdown-toggle px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subMuseum">
+                        🏛 Музей <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse mobile-dropdown-menu" id="subMuseum">
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'mudryj-uchitel' %}">Мудрый учитель...</a>
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'nemnogo-istorii' %}">Немного истории</a>
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'our-pride' %}">Наша гордость</a>
                     </div>
                 </div>
 
-                <a class="list-group-item list-group-item-action border-0 py-3" data-bs-toggle="collapse" href="#collapseLibrary">📚 Библиотека</a>
-                <div class="collapse" id="collapseLibrary">
-                    <div class="bg-light ps-4">
-                        <a class="list-group-item list-group-item-action bg-transparent border-0" href="{% url 'page_detail' 'bibliotechnaya-dokumentaciya' %}">Документация</a>
-                        <a class="list-group-item list-group-item-action bg-transparent border-0" href="{% url 'page_detail' 'books-jubilee' %}">Книги юбиляры</a>
+                <div class="list-group-item border-0 p-0">
+                    <a class="nav-link mobile-nav-link dropdown-toggle px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subLib">
+                        📚 Библиотека <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse mobile-dropdown-menu" id="subLib">
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'bibliotechnaya-dokumentaciya' %}">Документация</a>
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'books-jubilee' %}">Книги юбиляры</a>
                     </div>
                 </div>
 
-                <a class="list-group-item list-group-item-action border-0 py-3" href="{% url 'page_detail' 'teachers' %}">🎓 Наши педагоги</a>
-                <a class="list-group-item list-group-item-action border-0 py-3" href="{% url 'page_detail' 'psychology' %}">🧠 Психолог</a>
-                <a class="list-group-item list-group-item-action border-0 py-3" href="{% url 'virtual_reception' %}">💻 Приемная</a>
-                <a class="list-group-item list-group-item-action border-0 py-3" href="{% url 'page_detail' 'contacts' %}">📞 Контакты</a>
+                <div class="list-group-item border-0 p-0">
+                    <a class="nav-link mobile-nav-link dropdown-toggle px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subInfo">
+                        ℹ️ Информация <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse mobile-dropdown-menu" id="subInfo">
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'simvolika' %}">Символика лицея</a>
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'weather-cancel' %}">Отмена занятий</a>
+                    </div>
+                </div>
+
+                <div class="list-group-item border-0 p-0">
+                    <a class="nav-link mobile-nav-link dropdown-toggle px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subKab">
+                        🎓 Учебный кабинет <i class="bi bi-chevron-down"></i>
+                    </a>
+                    <div class="collapse mobile-dropdown-menu" id="subKab">
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'teachers' %}">Наши педагоги</a>
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'psychology' %}">Психолог</a>
+                    </div>
+                </div>
+
+                <a href="{% url 'virtual_reception' %}" class="list-group-item list-group-item-action py-3 border-0 px-3 fw-bold">💻 Виртуальная приемная</a>
+                <a href="{% url 'page_detail' 'contacts' %}" class="list-group-item list-group-item-action py-3 border-0 px-3 fw-bold">📞 Контакты</a>
+
             </div>
         </div>
     </div>
 
-    <main class="container">
+    <main class="container shadow-sm">
         {% block content %}{% endblock %}
     </main>
 
