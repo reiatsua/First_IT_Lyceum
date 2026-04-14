@@ -19,8 +19,44 @@
         }
         
         body {
-            padding-top: 130px; /* Тот самый отступ */
-            background-color: #f8f9fa;
+            padding-top: 130px; 
+            /* Слегка приглушенный фон, чтобы белый контейнер "сиял" */
+            background-color: #f0f2f5; 
+        }
+
+        main.container {
+            /* Идеально белый цвет */
+            background-color: #ffffff; 
+            
+            /* Скругляем углы побольше для современности */
+            border-radius: 1.5rem; 
+            padding: 2.5rem;
+            margin-top: 2rem;
+            margin-bottom: 3rem;
+            
+            /* Мягкая и глубокая тень (эффект глубины) */
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05); 
+            
+            /* Тонкая рамка, чтобы границы были четче на светлом фоне */
+            border: 1px solid rgba(0, 0, 0, 0.03); 
+            
+            min-height: 80vh;
+        }
+
+        /* Добавим плавности при загрузке страницы */
+        main.container {
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (min-width: 1200px) {
+            main.container {
+                max-width: 1000px; /* Текст не будет растягиваться слишком сильно */
+            }
         }
 
         .hover-shadow:hover {
