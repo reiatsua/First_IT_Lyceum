@@ -1,5 +1,9 @@
 # 🏫 Экосистема Первого IT-лицея | Основной портал
 
+![Python](https://img.shields.io/badge/Python-3.14-blue?logo=python&logoColor=white)
+![Django](https://img.shields.io/badge/Django-6.0-0C4B33?logo=django&logoColor=white)
+![Bootstrap](https://img.shields.io/badge/Bootstrap-5.3-7952B3?logo=bootstrap&logoColor=white)
+
 Основной веб-портал и backend-ядро цифровой экосистемы Первого IT-лицея. Проект включает в себя сайт с новостями, информацией о школе, систему виртуальной приемной и API для взаимодействия с Telegram-ботами.
 
 ## 🧩 Модули системы (Микросервисы)
