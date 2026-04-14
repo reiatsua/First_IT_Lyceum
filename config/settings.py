@@ -25,12 +25,14 @@ DEBUG = os.getenv('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = [os.getenv('ALLOWED_HOST', '127.0.0.1')]
 
 INSTALLED_APPS = [
+    'cloudinary_storage',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'cloudinary',
     'main',
     'users',
 ]
@@ -65,6 +67,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dmwfrubso',
+    'API_KEY': '698273328199345',
+    'API_SECRET': 'dHuyUY4j7NqyVc7Ylsn1HRy173w'
+}
 
 if database_url:
     DATABASES = {
@@ -116,3 +124,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGOUT_REDIRECT_URL = 'home'
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
