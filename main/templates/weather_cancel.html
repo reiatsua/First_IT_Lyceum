@@ -1,0 +1,203 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .weather-container { padding-bottom: 5rem; }
+    
+    .memorial-header {
+        border-left: 5px solid #0d6efd;
+        padding-left: 20px;
+        margin-top: 2rem;
+    }
+
+    .official-document-box {
+        background-color: #f8f9fa;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        border: 1px solid #dee2e6;
+        color: #475569;
+        text-align: justify;
+        line-height: 1.8;
+        font-size: 1.05rem;
+        box-shadow: inset 0 0 15px rgba(0,0,0,0.02);
+    }
+
+    .section-title {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        margin-top: 4rem;
+        font-weight: 800;
+        color: #212529;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 5px;
+        background: #0d6efd;
+        border-radius: 3px;
+    }
+
+    .weather-card {
+        border: none;
+        border-radius: 1.5rem;
+        background: #ffffff;
+        box-shadow: 0 10px 30px rgba(13, 110, 253, 0.08);
+        transition: transform 0.3s ease;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .weather-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(13, 110, 253, 0.15);
+    }
+
+    .weather-card-header {
+        background: linear-gradient(135deg, #0d6efd 0%, #004aad 100%);
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.4rem;
+    }
+
+    .weather-card-body {
+        padding: 25px;
+    }
+
+    .temp-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .temp-row:last-child {
+        border-bottom: none;
+    }
+
+    .temp-condition {
+        color: #64748b;
+        font-weight: 600;
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .temp-value {
+        color: #0f172a;
+        font-size: 1.3rem;
+        font-weight: 800;
+    }
+
+    .signature-block {
+        text-align: right;
+        margin-top: 3rem;
+        font-style: italic;
+        color: #495057;
+    }
+
+    .wind-note {
+        background-color: #e0f2fe;
+        color: #0369a1;
+        padding: 15px 20px;
+        border-radius: 1rem;
+        border-left: 4px solid #0ea5e9;
+        font-weight: 600;
+        margin-top: 2rem;
+    }
+</style>
+
+<div class="container weather-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            
+            <div class="memorial-header mb-5">
+                <h1 class="fw-bold text-primary display-4 mb-3">Об отмене учебных занятий</h1>
+                <p class="text-muted fs-5 mb-0">в организациях КГУ «Отдел образования города Петропавловска» в зимний период</p>
+            </div>
+
+            <div class="official-document-box mb-5">
+                <p class="mb-4">В соответствии с подпунктом 2 статьи 55 Закона РК «О правовых актах», пунктом 1 статьи 48 Закона Республики Казахстан «Об образовании», пунктом 3 «Правил отмены занятий в организациях среднего образования, а также организациях образования, реализующих образовательные программы технического и профессионального образования, при неблагоприятных погодных метеоусловиях», утвержденных приказом Министра образования и науки РК от 18 января 2016 года №42, КГУ «Управление образования акимата Северо-Казахстанской области» от 16 ноября 2017 года №1240, и в целях безопасности и сохранения здоровья обучающихся в осенне-зимний период учебного года,</p>
+                <h4 class="fw-bold text-dark text-center mb-0">ПРИКАЗЫВАЮ:</h4>
+            </div>
+
+            <p class="fs-5 text-center mb-4">Отменять занятия в учебных организациях при следующих температурных пределах:</p>
+
+            <div class="row g-4 mb-4">
+                
+                <div class="col-md-4">
+                    <div class="card weather-card">
+                        <div class="weather-card-header">
+                            1-4 классы
+                        </div>
+                        <div class="weather-card-body">
+                            <div class="temp-row">
+                                <span class="temp-condition">💨 Ветер от 2 м/с</span>
+                                <span class="temp-value">-25°С</span>
+                            </div>
+                            <div class="temp-row">
+                                <span class="temp-condition">❄️ Без ветра (до 2 м/с)</span>
+                                <span class="temp-value">-30°С</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card weather-card">
+                        <div class="weather-card-header" style="background: linear-gradient(135deg, #0b5ed7 0%, #003a8c 100%);">
+                            1-9 классы
+                        </div>
+                        <div class="weather-card-body">
+                            <div class="temp-row">
+                                <span class="temp-condition">💨 Ветер от 2 м/с</span>
+                                <span class="temp-value">-27°С</span>
+                            </div>
+                            <div class="temp-row">
+                                <span class="temp-condition">❄️ Без ветра (до 2 м/с)</span>
+                                <span class="temp-value">-32°С</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card weather-card">
+                        <div class="weather-card-header" style="background: linear-gradient(135deg, #084298 0%, #001f4d 100%);">
+                            1-11 классы
+                        </div>
+                        <div class="weather-card-body">
+                            <div class="temp-row">
+                                <span class="temp-condition">💨 Ветер от 2 м/с</span>
+                                <span class="temp-value">-30°С</span>
+                            </div>
+                            <div class="temp-row">
+                                <span class="temp-condition">❄️ Без ветра (до 2 м/с)</span>
+                                <span class="temp-value">-35°С</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="wind-note">
+                ℹ️ <strong>Правило расчета:</strong> В случае скорости ветра, не превышающей 2 м/с, температурный порог для отмены занятий увеличивается на -5°С (становится холоднее). В карточках выше расчет уже произведен для вашего удобства.
+            </div>
+
+            <div class="signature-block">
+                <p class="mb-0 fs-5">И.О. Руководителя отдела<br><strong>А. Сураганова</strong></p>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
