@@ -70,8 +70,8 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 CLOUDINARY_STORAGE = {
     'CLOUD_NAME': 'dmwfrubso',
-    'API_KEY': '698273328199345',
-    'API_SECRET': 'dHuyUY4j7NqyVc7Ylsn1HRy173w'
+    'API_KEY': os.getenv('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.getenv('CLOUDINARY_API_SECRET')
 }
 
 if database_url:
@@ -125,4 +125,12 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LOGOUT_REDIRECT_URL = 'home'
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        # Оставляем WhiteNoise для статики (CSS, JS)
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
