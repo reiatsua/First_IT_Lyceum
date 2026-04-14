@@ -5,23 +5,21 @@
 <style>
     .psy-container { padding-bottom: 5rem; }
     
-    /* Твой фирменный стиль заголовка */
     .memorial-header {
         border-left: 5px solid #0d6efd;
         padding-left: 20px;
         margin-top: 2rem;
     }
 
-    /* Стили для карточек (как в истории/книгах) */
     .info-card {
         border: none;
         border-radius: 1.2rem;
         background: #ffffff;
         box-shadow: 0 4px 15px rgba(0,0,0,0.05);
         border-top: 4px solid #0d6efd;
+        padding: 1.5rem !important; /* Убрали лишнюю высоту */
     }
 
-    /* Акцент на важную информацию (Телефон доверия) */
     .hotline-box {
         background: linear-gradient(135deg, #0d6efd 0%, #004aad 100%);
         color: white;
@@ -32,7 +30,6 @@
         box-shadow: 0 10px 30px rgba(13, 110, 253, 0.2);
     }
 
-    /* Таблица в твоем стиле */
     .psy-table {
         background: white;
         border-radius: 1rem;
@@ -70,6 +67,15 @@
         margin: 5px;
         border: 1px solid #e2e8f0;
     }
+
+    /* Стиль для кнопок копирования */
+    .copy-email {
+        cursor: pointer;
+        transition: all 0.2s ease;
+    }
+    .copy-email:active {
+        transform: scale(0.95);
+    }
 </style>
 
 <div class="container psy-container">
@@ -81,10 +87,16 @@
                 <p class="text-muted fs-5">Поддержка, развитие и помощь в любой ситуации</p>
             </div>
 
-            <div class="card info-card p-4 mb-5">
-                <h3 class="fw-bold text-dark mb-3">Уважаемые учащиеся, родители и педагоги!</h3>
-                <p class="fs-5 text-secondary lead">Службой лицея проводятся индивидуальные консультации по интересующим Вас проблемам в <strong>очном и дистанционном формате</strong>. Вы можете прийти лично или направить вопросы на электронные адреса в любое удобное время.</p>
-                <p class="text-muted mb-0"><i class="bi bi-info-circle me-2"></i>Ответы будут отправлены по электронной почте в указанное время консультаций. Онлайн-встречи — по взаимной договоренности.</p>
+            <div class="card info-card mb-5">
+                <h4 class="fw-bold text-dark mb-3">Уважаемые учащиеся, родители и педагоги!</h4>
+                <p class="text-secondary mb-3" style="font-size: 1.1rem;">
+                    Службой лицея проводятся индивидуальные консультации по интересующим Вас проблемам в <b>очном и дистанционном формате</b>. 
+                    Вы можете прийти лично или направить вопросы на электронные адреса в любое удобное время.
+                </p>
+                <p class="text-muted small mb-0">
+                    <i class="bi bi-info-circle me-1"></i>
+                    Ответы будут отправлены по электронной почте в указанное время консультаций. Онлайн-встречи — по взаимной договоренности.
+                </p>
             </div>
 
             <h2 class="section-title">График консультаций на 2025-2026 уч. год</h2>
@@ -95,7 +107,7 @@
                             <th class="py-3 px-4">Классы</th>
                             <th class="py-3">Ф.И.О. педагога</th>
                             <th class="py-3">Дни и время</th>
-                            <th class="py-3 text-center">Электронная почта</th>
+                            <th class="py-3 text-center">Электронная почта (нажмите, чтобы скопировать)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -103,13 +115,21 @@
                             <td class="px-4 fw-bold">Начальное звено (КПП - 4)</td>
                             <td>Ендуткина Виктория Викторовна</td>
                             <td>Среда: 9.00 - 12.00</td>
-                            <td class="text-center"><a href="mailto:vikkialbert@mail.ru" class="btn btn-sm btn-outline-primary rounded-pill">vikkialbert@mail.ru</a></td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-outline-primary rounded-pill copy-email" data-email="vikkialbert@mail.ru">
+                                    vikkialbert@mail.ru
+                                </button>
+                            </td>
                         </tr>
                         <tr>
                             <td class="px-4 fw-bold">КПП - 11 классы</td>
                             <td>Касымова Салтанат Еркеновна <br><small class="text-muted">социальный педагог</small></td>
                             <td>Вторник: 15.00 - 17.00</td>
-                            <td class="text-center"><a href="mailto:salta_17-94@mail.ru" class="btn btn-sm btn-outline-primary rounded-pill">salta_17-94@mail.ru</a></td>
+                            <td class="text-center">
+                                <button class="btn btn-sm btn-outline-primary rounded-pill copy-email" data-email="salta_17-94@mail.ru">
+                                    salta_17-94@mail.ru
+                                </button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -145,4 +165,40 @@
         </div>
     </div>
 </div>
+
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 1100">
+    <div id="copyToast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="bi bi-check-circle me-2"></i> Почта скопирована в буфер обмена!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    </div>
+</div>
+
+<script>
+document.querySelectorAll('.copy-email').forEach(button => {
+    button.addEventListener('click', function() {
+        const email = this.getAttribute('data-email');
+        
+        navigator.clipboard.writeText(email).then(() => {
+            // Показываем уведомление
+            const toastElement = document.getElementById('copyToast');
+            const toast = new bootstrap.Toast(toastElement);
+            toast.show();
+            
+            // Визуальный отклик на кнопке
+            const originalText = this.innerText;
+            this.innerText = 'Скопировано!';
+            this.classList.replace('btn-outline-primary', 'btn-success');
+            
+            setTimeout(() => {
+                this.innerText = originalText;
+                this.classList.replace('btn-success', 'btn-outline-primary');
+            }, 2000);
+        });
+    });
+});
+</script>
 {% endblock %}
