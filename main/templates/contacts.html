@@ -1,0 +1,104 @@
+<style>
+    .contact-section {
+        background: #ffffff;
+        border-radius: 1.5rem;
+        padding: 2.5rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        margin-top: 3rem;
+        border-top: 4px solid #0d6efd;
+    }
+
+    .contact-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        border-radius: 1rem;
+        transition: all 0.3s ease;
+        border: 1px solid transparent;
+    }
+
+    .contact-item:hover {
+        background: #f8f9fa;
+        border-color: #dee2e6;
+        transform: translateX(10px);
+    }
+
+    .contact-icon {
+        width: 50px;
+        height: 50px;
+        background: rgba(13, 110, 253, 0.1);
+        color: #0d6efd;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        margin-right: 1.5rem;
+    }
+
+    .contact-info h6 {
+        margin-bottom: 2px;
+        font-weight: 700;
+        color: #212529;
+    }
+
+    .contact-info p, .contact-info a {
+        margin-bottom: 0;
+        color: #64748b;
+        text-decoration: none;
+        font-size: 1.05rem;
+    }
+
+    .contact-info a:hover {
+        color: #0d6efd;
+    }
+</style>
+
+<div class="contact-section">
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h3 class="fw-bold text-primary">Связаться с нами</h3>
+            <p class="text-muted">Республика Казахстан, г. Петропавловск</p>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                <div class="contact-info">
+                    <h6>Адрес</h6>
+                    <p>ул. Жамбыла, 196</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="bi bi-telephone-fill"></i>
+                </div>
+                <div class="contact-info">
+                    <h6>Телефоны</h6>
+                    <a href="tel:87152467046">8 (7152) 46-70-46</a><br>
+                    <a href="tel:87152500716">8 (7152) 50-07-16</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 col-lg-4">
+            <div class="contact-item">
+                <div class="contact-icon">
+                    <i class="bi bi-envelope-at-fill"></i>
+                </div>
+                <div class="contact-info">
+                    <h6>E-mail</h6>
+                    <button class="btn btn-link p-0 copy-email text-start" data-email="fitlyceum@sqo.gov.kz">
+                        fitlyceum@sqo.gov.kz
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

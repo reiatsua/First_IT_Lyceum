@@ -36,6 +36,8 @@ def page_detail(request, slug):
         return render(request, 'teachers.html', {'categories': categories})
     elif slug == 'psychology':
         return render(request, 'psychology.html')
+    elif slug == 'contacts':
+        return render(request, 'contacts.html')
     page = get_object_or_404(Page, slug=slug)
     return render(request, 'page.html', {'page': page})
 
