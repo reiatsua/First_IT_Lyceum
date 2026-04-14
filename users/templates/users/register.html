@@ -5,17 +5,23 @@
     <div class="col-md-6">
         <div class="card shadow-sm p-4">
             <h2 class="text-center mb-4">Регистрация</h2>
+
+            {% if form.non_field_errors or messages %}
+                <div class="alert alert-danger py-2 shadow-sm mb-3">
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="fw-bold text-center small">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                    {% for error in form.non_field_errors %}
+                        <div class="fw-bold text-center small">{{ error }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
             <form method="post" novalidate>
                 {% csrf_token %}
                 
-                {% if form.non_field_errors %}
-                    <div class="alert alert-danger py-2">
-                        {% for error in form.non_field_errors %}
-                            <div class="fw-bold text-center">{{ error }}</div>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-
                 {% for field in form %}
                     <div class="mb-3" id="div_{{ field.html_name }}">
                         <label class="form-label text-muted mb-1">
@@ -42,23 +48,22 @@
                             <div class="text-danger small fw-bold mt-1">
                                 {{ field.errors|join:", " }}
                             </div>
-                            {% if field.name != 'role' %}
-                                <script>
-                                    // Оборачиваем в DOMContentLoaded, чтобы элемент точно загрузился перед добавлением класса
-                                    document.addEventListener("DOMContentLoaded", function() {
-                                        let errInput = document.getElementById("{{ field.id_for_label }}");
-                                        if (errInput) {
-                                            errInput.classList.add("is-invalid", "border-danger");
-                                        }
-                                    });
-                                </script>
-                            {% endif %}
+                            <script>
+                                document.addEventListener("DOMContentLoaded", function() {
+                                    let errInput = document.getElementById("{{ field.id_for_label }}");
+                                    if (errInput) {
+                                        errInput.classList.add("is-invalid", "border-danger");
+                                    }
+                                });
+                            </script>
                         {% endif %}
                     </div>
                 {% endfor %}
-                <button type="submit" class="btn btn-primary w-100 mt-4">Зарегистрироваться</button>
+
+                <button type="submit" class="btn btn-primary w-100 mt-4 shadow-sm py-2">Зарегистрироваться</button>
             </form>
-            <p class="mt-4 text-center">
+
+            <p class="mt-4 text-center mb-0">
                 Уже есть аккаунт? <a href="{% url 'login' %}" class="text-decoration-none">Войти</a>
             </p>
         </div>
@@ -67,26 +72,15 @@
 
 <script>
     document.addEventListener("DOMContentLoaded", function() {
-        // 1. Добавляем красивые классы Bootstrap ко всем текстовым полям
+        // 1. Добавляем красивые классы Bootstrap
         document.querySelectorAll('input:not([type="radio"]):not([type="checkbox"]):not([type="file"])').forEach(input => {
             if (!input.classList.contains('form-control')) {
                 input.classList.add('form-control');
             }
         });
 
-        // 2. Маска для телефона (только цифры и плюс)
-        const phoneInput = document.getElementById("id_phone_number");
-        if (phoneInput) {
-            phoneInput.addEventListener("input", function() {
-                this.value = this.value.replace(/[^\d\s\+]/g, "");
-            });
-        }
-
-        // 3. Главная логика переключения полей
+        // 2. Логика переключения полей Класс/Группа
         const roleRadios = document.querySelectorAll('input[name="role"]');
-        
-        // Находим контейнеры (div), в которых лежат наши новые поля
-        // Убедись, что в HTML ты обернул эти поля в div с такими id!
         const gradeNumDiv = document.getElementById("div_grade_number");
         const gradeLetDiv = document.getElementById("div_grade_letter");
         const subgroupDiv = document.getElementById("div_subgroup");
@@ -94,50 +88,19 @@
         function toggleFields() {
             let selectedRole = document.querySelector('input[name="role"]:checked');
             
-            // Находим сами элементы ввода, чтобы вешать на них required
-            const gradeSelect = document.querySelector('select[name="grade_number"]');
-            const gradeLetterRadios = document.querySelectorAll('input[name="grade_letter"]');
-            const subgroupRadios = document.querySelectorAll('input[name="subgroup"]');
-            
-            if (selectedRole) {
-                // Если выбран Учитель или Родитель
-                if (selectedRole.value === 'teacher' || selectedRole.value === 'parent') {
-                    // Прячем блоки с классами
-                    if(gradeNumDiv) gradeNumDiv.style.display = 'none';
-                    if(gradeLetDiv) gradeLetDiv.style.display = 'none';
-                    if(subgroupDiv) subgroupDiv.style.display = 'none';
-                    
-                    // Снимаем с них обязательность
-                    if(gradeSelect) gradeSelect.required = false;
-                    gradeLetterRadios.forEach(radio => radio.required = false);
-                    subgroupRadios.forEach(radio => radio.required = false);
-                    
-                } 
-                // Если выбран Ученик
-                else if (selectedRole.value === 'student') {
-                    // Показываем блоки с классами
-                    if(gradeNumDiv) gradeNumDiv.style.display = 'block';
-                    if(gradeLetDiv) gradeLetDiv.style.display = 'block';
-                    if(subgroupDiv) subgroupDiv.style.display = 'block';
-                    
-                    // Делаем их обязательными
-                    if(gradeSelect) gradeSelect.required = true;
-                    gradeLetterRadios.forEach(radio => radio.required = true);
-                    subgroupRadios.forEach(radio => radio.required = true);
-                }
+            if (selectedRole && selectedRole.value === 'student') {
+                if(gradeNumDiv) gradeNumDiv.style.display = 'block';
+                if(gradeLetDiv) gradeLetDiv.style.display = 'block';
+                if(subgroupDiv) subgroupDiv.style.display = 'block';
             } else {
-                // Если при загрузке страницы роль еще не выбрана - прячем классы
                 if(gradeNumDiv) gradeNumDiv.style.display = 'none';
                 if(gradeLetDiv) gradeLetDiv.style.display = 'none';
                 if(subgroupDiv) subgroupDiv.style.display = 'none';
             }
         }
 
-        // Вешаем слушатель на изменение роли
         roleRadios.forEach(radio => radio.addEventListener('change', toggleFields));
-        
-        // Запускаем один раз при загрузке страницы
-        toggleFields();
+        toggleFields(); // запуск при загрузке
     });
 </script>
 {% endblock %}

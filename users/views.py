@@ -12,13 +12,19 @@ from .forms import UserRegisterForm, UserLoginForm, UserUpdateForm
 
 def register_view(request):
     if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+        form = UserRegisterForm(request.POST) # Берем данные из POST
         if form.is_valid():
             user = form.save()
             login(request, user)
+            messages.success(request, 'Добро пожаловать! Регистрация прошла успешно.')
             return redirect('home')
+        else:
+            # ВАЖНО: Мы НЕ пересоздаем форму. 
+            # Мы просто идем дальше, и render ниже вернет форму с ошибками.
+            messages.error(request, 'Пожалуйста, исправьте ошибки в форме.')
     else:
         form = UserRegisterForm()
+    
     return render(request, 'users/register.html', {'form': form})
 
 def login_view(request):
