@@ -24,38 +24,33 @@
             background-color: #f0f2f5; 
         }
 
+        /* Базовые настройки для всех экранов */
         main.container {
-            /* Идеально белый цвет */
-            background-color: #ffffff; 
-            
-            /* Скругляем углы побольше для современности */
-            border-radius: 1.5rem; 
+            background-color: #ffffff;
+            border-radius: 1.5rem;
             padding: 2.5rem;
             margin-top: 2rem;
             margin-bottom: 3rem;
-            
-            /* Мягкая и глубокая тень (эффект глубины) */
-            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05); 
-            
-            /* Тонкая рамка, чтобы границы были четче на светлом фоне */
-            border: 1px solid rgba(0, 0, 0, 0.03); 
-            
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(0, 0, 0, 0.03);
             min-height: 80vh;
+            
+            /* Плавное изменение ширины при ресайзе */
+            transition: max-width 0.3s ease; 
         }
 
-        /* Добавим плавности при загрузке страницы */
-        main.container {
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        /* Расширяем контейнер на больших мониторах */
         @media (min-width: 1200px) {
             main.container {
-                max-width: 1000px; /* Текст не будет растягиваться слишком сильно */
+                /* Было 1000px, стало 1300px */
+                max-width: 1300px !important; 
+            }
+        }
+
+        /* На огромных мониторах можно дать еще чуть больше места */
+        @media (min-width: 1600px) {
+            main.container {
+                max-width: 1450px !important;
             }
         }
 
