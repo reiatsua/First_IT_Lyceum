@@ -41,3 +41,17 @@ class Appeal(models.Model):
 
     def __str__(self):
         return f"Обращение от {self.name}"
+    
+class BookAnniversary(models.Model):
+    anniversary_years = models.CharField("Лет юбилею", max_length=50, help_text="Например: 100 лет")
+    writing_year = models.CharField("Год написания", max_length=50, help_text="Например: 1922 г.")
+    author = models.CharField("Автор", max_length=255)
+    description = models.TextField("Описание/Список книг")
+
+    class Meta:
+        verbose_name = "Книга-юбиляр"
+        verbose_name_plural = "Книги-юбиляры"
+        ordering = ['-writing_year'] # Будут идти от новых к старым
+
+    def __str__(self):
+        return f"{self.author} — {self.anniversary_years}"

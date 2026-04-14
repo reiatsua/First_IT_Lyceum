@@ -1,0 +1,310 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .pride-container { padding-bottom: 5rem; }
+    
+    .memorial-header {
+        border-left: 5px solid #0d6efd;
+        padding-left: 20px;
+        margin-top: 2rem;
+    }
+
+    .intro-text {
+        font-size: 1.15rem;
+        line-height: 1.8;
+        color: #475569;
+        text-align: justify;
+        background-color: #f8fafc;
+        padding: 2rem;
+        border-radius: 1.5rem;
+        border-right: 4px solid #0d6efd;
+    }
+
+    .section-title {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        margin-top: 4rem;
+        font-weight: 800;
+        color: #1e293b;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 5px;
+        background: #0d6efd;
+        border-radius: 3px;
+    }
+
+    /* Карточки выпускников */
+    .alumni-card {
+        border: none;
+        border-radius: 1.2rem;
+        background: #ffffff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        border: 1px solid #f1f5f9;
+    }
+
+    .alumni-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 24px rgba(13, 110, 253, 0.1);
+        border-color: #0d6efd;
+    }
+
+    .year-badge {
+        background-color: #eef2ff;
+        color: #0d6efd;
+        padding: 4px 12px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+
+    .alumni-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin-bottom: 8px;
+    }
+
+    .alumni-desc {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        color: #64748b;
+    }
+
+    /* Сетка для кратких упоминаний */
+    .small-card {
+        padding: 1.25rem;
+        background: #fff;
+        border-radius: 1rem;
+        border-left: 4px solid #dee2e6;
+        transition: 0.2s;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    }
+    .small-card:hover {
+        border-left-color: #0d6efd;
+        background: #f1f8ff;
+    }
+</style>
+
+<div class="container pride-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            
+            <div class="memorial-header mb-5">
+                <h1 class="fw-bold text-primary display-4 mb-3">Наша гордость</h1>
+            </div>
+
+            <div class="intro-text mb-5 shadow-sm">
+                Выпускники лицея живут и трудятся в разных городах ближнего и дальнего зарубежья. У каждого из них своя судьба, но все они хранят в уголке души память о лицейском братстве, не забывают родной лицей, а мы помним их и гордимся ими.
+            </div>
+
+            <div class="row g-4">
+                
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">1995 г.</span>
+                            <div class="alumni-name">Александр Ушаков</div>
+                        </div>
+                        <p class="alumni-desc mb-0">Занимается математической наукой в Америке, регулярно публикует фундаментальные научные труды, а главное - стал в Штатах доктором наук</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">1994 г.</span>
+                            <div class="alumni-name">Василий Черепанов</div>
+                        </div>
+                        <p class="alumni-desc mb-0">Живет и работает в Германии, серьезно занимается физикой, является автором прогрессивных научных проектов в области создания искусственных алмазов.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">1995 г.</span>
+                            <div class="alumni-name">Сергей Крих</div>
+                        </div>
+                        <p class="alumni-desc mb-0 small">Поэт, прозаик, член Союза писателей России. Окончил исторический факультет ОМГУ. Защитил дисертацию, став кандидатом исторических наук. Печатается в журналах "Литературный Омск", "Сибирские огни", "Нива" и др. Является автором книги "Хруст эпохи". В 2000 году стал лауреатом молодежной премии им. Ф.М.Достоевского в Омской области. В январе 2012 года Сергей стал обладателем президентского гранта в размере 1,2 миллиона рублей на исследование темы "Советская историография древности: образ эпохи и его творцы". В настоящий момент учёный работает в Омском государственном университете.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">1994 г.</span>
+                            <div class="alumni-name">Инна Живетьева</div>
+                        </div>
+                        <p class="alumni-desc mb-0">Живет в г. Новосибирске. Писатель. Автор романов-фэнтези: “Цена свободы“, “Рунный след“, “Орлиная гора“, “Черные пески“. Рассказы публикуются в тематических сборниках и журналах “Подень XXI век“, “Техника молодежи“, “Уральский следопыт“, “Реальная фантастика“ и др. На конвенте Роскон-2006 получила диплом мастер-класса Марины и Сергея Дяченко. Работает системным аналитиком в крупной оптово-розничной компании.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">1994 г.</span>
+                            <div class="alumni-name">Николай Литвиненко</div>
+                        </div>
+                        <p class="alumni-desc mb-0">Живет в Лондоне, Великобритания, и работает инвестиционным банкиром в Goldman Sachs, ведущем инвестиционном банке мира. Окончил с отличием Московский Государственный Университет им. М. В. Ломоносова, где получил степень магистра экономики и кандидата экономических наук. Также закончил с отличием бизнес школу Wharton Университета Пеннсильвании (США), где получил степень магистра делового андминистрирования (MBA).</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">1994 г.</span>
+                            <div class="alumni-name">Олжас Изгутдин</div>
+                        </div>
+                        <p class="alumni-desc mb-0">Работает в европейской финансовой группе Юри Кредит т.е. в АО "АТФ-финанс", Председателем Правления. Поле деятельности - мировой фондовый рынок, т.е. брокерско-дилерская деятельность и деятельность по управлению активами</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">1995 г.</span>
+                            <div class="alumni-name">Жан Иссин</div>
+                        </div>
+                        <p class="alumni-desc mb-0">Астана, Министерство туризма и спорта, директор департамента экономики и финансов.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">2003 г.</span>
+                            <div class="alumni-name">Данияр Байтенизов</div>
+                        </div>
+                        <p class="alumni-desc mb-0">По итогам ЕНТ вошел в десятку лучших выпускников Республики Казахстан (106 б). Закончил Казахстанский университет международных отношений и мировых языков. Место работы: г. Петропавловск, городской акимат, главный специалист отдела территориального развития.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card alumni-card p-4">
+                        <div>
+                            <span class="year-badge">1995 г.</span>
+                            <div class="alumni-name">Ирина Кукарская</div>
+                        </div>
+                        <p class="alumni-desc mb-0">Закончила Омский государственный университет им. Ф.М. Достоевского, исторический факультет, отделение теологии. Год окончания: 2003, кандидат философских наук. Место работы: доцент кафедры "Связи с общественностью" Института менеджмента и экономики Омского государственного университета путей сообщения.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="section-title">География и достижения</h2>
+            <div class="row g-4 mb-5">
+                
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">1995 г.</span> <div class="alumni-name">Артем Киселев</div></div>
+                        <p class="alumni-desc">Автомобильный Холдинг "Инком-Авто", дирекция по развитию, зам.руководителя службы недвижимости.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">1993 г.</span> <div class="alumni-name">Ольга Райш</div></div>
+                        <p class="alumni-desc">(самый первый выпуск лицея) Окончила СКГУ в 1997 году, затем Франкфуртский Университет по специальности "фармацевт", Германия.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">1993 г.</span> <div class="alumni-name">Виталий Билевич</div></div>
+                        <p class="alumni-desc">Закончил Уральский Государственный Университет, Математико-механический факультет, по специальности математик-прикладник, специализация «Компьютерные науки». Работает в г.Екатеринбурге директором департамента по информационным технологиям.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">2001 г.</span> <div class="alumni-name">Аскер Мухамеджанов</div></div>
+                        <p class="alumni-desc">Закончил казахскую Гуманитарно-Юридическую академию в г. Алматы, по специализации «бизнес-юрист». Работает в г.Астане в Юридическом управлении АО «Астана-Финанс».</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">1994 г.</span> <div class="alumni-name">Ярослав Лопухин</div></div>
+                        <p class="alumni-desc">Работает в Томске старшим преподавателем факультета Международного управления Томского государственного университета.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">1993 г.</span> <div class="alumni-name">Жанна Потемкина (Бутывская)</div></div>
+                        <p class="alumni-desc">Закончила: СКГУ – экономика и управление производством и Новосибирский государственный университет - инновационный менеджмент., Работает в г.Москве начальником отдела маркетинга в компании «Гамма-Центр».</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">1998 г.</span> <div class="alumni-name">Александр Целых</div></div>
+                        <p class="alumni-desc">Активный участник лицейской жизни. Окончил юридический факультет университета. Работает директором ООО «Агентство юридической безопасности». Спец юстиция. Г. Челябинск.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">1995 г.</span> <div class="alumni-name">Денис Иванов – Меркель</div></div>
+                        <p class="alumni-desc">Неоднократный победитель турнира «Престиж», олимпиад различного ранга. Первый «Лицеист года» (1993). Окончил университет в г. Алзей (Германия). Работает в г. Нюренберге в немецко-американской фирме.</p>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card alumni-card p-4">
+                        <div><span class="year-badge">1997 г.</span> <div class="alumni-name">Сергей Богушевич</div></div>
+                        <p class="alumni-desc">Неоднократный победитель олимпиад. Закончил Омский Государственный университет. Работает в г. Челябинске, начальником дорожной лаборатории связи Южно-уральской железной дороги.</p>
+                    </div>
+                </div>
+
+            </div>
+
+            <h2 class="section-title">Коротко о достижениях</h2>
+            <div class="row g-3">
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Вячеслав Балов</strong> <span class="text-muted">(1993 г.)</span><br>Бизнесмен.</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Асем Керимова</strong> <span class="text-muted">(1993 г.)</span><br>Юрист.</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Ерлан Мустафин</strong> <span class="text-muted">(1994 г.)</span><br>Юрист.</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Алена Малая</strong> <span class="text-muted">(1995 г.)</span><br>Преподаватель СКГУ.</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Елена Бережная</strong> <span class="text-muted">(1997 г.)</span><br>Журналист.</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Татьяна Степанова</strong> <span class="text-muted">(1997 г.)</span><br>Преподаватель Сев.-Каз. ИПК.</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Станислав Губин</strong> <span class="text-muted">(1999 г.)</span><br>Аспирант, преподаватель СКГУ.</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Евгений Пеньков</strong> <span class="text-muted">(1999 г.)</span><br>Директор Северо-Казахстанской лиги КВН.</div>
+                </div>
+                <div class="col-md-4 col-sm-6">
+                    <div class="small-card"><strong>Данияр Байтенизов</strong> <span class="text-muted">(2002 г.)</span><br>Помощник ректора СКГУ.</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import News, Page, Appeal
+from .models import News, Page, Appeal, BookAnniversary
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
@@ -17,3 +17,8 @@ class AppealAdmin(admin.ModelAdmin):
     list_filter = ('is_processed', 'created_at')
     # В поиске тоже заменили 'subject' на 'email'
     search_fields = ('name', 'email', 'message')
+
+@admin.register(BookAnniversary)
+class BookAnniversaryAdmin(admin.ModelAdmin):
+    list_display = ('anniversary_years', 'author', 'writing_year')
+    search_fields = ('author', 'description')

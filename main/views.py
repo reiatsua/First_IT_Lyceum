@@ -3,16 +3,28 @@ import requests
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.conf import settings
-from .models import News, Page, Appeal
+from .models import News, Page, Appeal, BookAnniversary
 from .forms import AppealForm
 
 def home(request):
     news_list = News.objects.all()
-    return render(request, 'main/home.html', {'news_list': news_list})
+    return render(request, 'home.html', {'news_list': news_list})
 
 def page_detail(request, slug):
+    
+    if slug == 'mudryj-uchitel':
+        return render(request, 'wise_teacher.html')
+    elif slug == 'nemnogo-istorii':
+        return render(request, 'bit_of_history.html')
+    elif slug == 'our-pride':
+        return render(request, 'our_pride.html')
+    elif slug == 'bibliotechnaya-dokumentaciya':
+        return render(request, 'lib_doc.html')
+    elif slug == 'books-jubilee':
+        books = BookAnniversary.objects.all() # Вытягиваем книги из базы
+        return render(request, 'books_jubilee.html', {'books': books})
     page = get_object_or_404(Page, slug=slug)
-    return render(request, 'main/page.html', {'page': page})
+    return render(request, 'page.html', {'page': page})
 
 def virtual_reception(request):
     if request.method == 'POST':
@@ -63,4 +75,4 @@ def virtual_reception(request):
     else:
         form = AppealForm()
     
-    return render(request, 'main/virtual_reception.html', {'form': form})
+    return render(request, 'virtual_reception.html', {'form': form})
