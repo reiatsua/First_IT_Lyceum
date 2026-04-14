@@ -65,3 +65,30 @@ class SiteSettings(models.Model):
         
     def __str__(self):
         return "Настройки системы"
+    
+class TeacherCategory(models.Model):
+    name = models.CharField("Название категории", max_length=200)
+    order = models.PositiveIntegerField("Порядок отображения", default=0, help_text="Чем меньше число, тем выше категория")
+
+    class Meta:
+        verbose_name = "Категория учителей"
+        verbose_name_plural = "Категории учителей"
+        ordering = ['order']
+
+    def __str__(self):
+        return self.name
+
+class Teacher(models.Model):
+    category = models.ForeignKey(TeacherCategory, on_delete=models.CASCADE, related_name='teachers', verbose_name="Категория")
+    full_name = models.CharField("ФИО", max_length=255)
+    position = models.CharField("Должность", max_length=255)
+    photo = models.ImageField("Фотография", upload_to='teachers/')
+    order = models.PositiveIntegerField("Порядок в списке", default=0)
+
+    class Meta:
+        verbose_name = "Учитель"
+        verbose_name_plural = "Учителя"
+        ordering = ['order']
+
+    def __str__(self):
+        return self.full_name

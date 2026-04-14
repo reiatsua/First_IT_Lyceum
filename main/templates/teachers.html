@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .teachers-section { padding-bottom: 5rem; }
+    
+    .newsHead {
+        text-align: center;
+        font-weight: 800;
+        color: #212529;
+        margin: 3rem 0 2rem;
+        position: relative;
+    }
+
+    .teachers-grid {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    /* Контейнер карточки учителя */
+    .lake {
+        position: relative;
+        width: 150px; /* Немного увеличил для удобства */
+        height: 200px;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        cursor: pointer;
+        background: #eee;
+    }
+
+    /* Фотография */
+    .lac {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+
+    /* Эффект при наведении на карточку */
+    .lake:hover .lac {
+        transform: scale(1.1);
+    }
+
+    /* Всплывающее описание (Overlay) */
+    .teacher-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(13, 110, 253, 0.85); /* Синий прозрачный фон в стиле лицея */
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 10px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .lake:hover .teacher-overlay {
+        opacity: 1;
+    }
+
+    .teacher-name {
+        font-size: 0.9rem;
+        font-weight: bold;
+        line-height: 1.2;
+        margin-bottom: 5px;
+    }
+
+    .teacher-post {
+        font-size: 0.75rem;
+        opacity: 0.9;
+    }
+</style>
+
+<div class="container teachers-section">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            
+            <h1 class="fw-bold text-primary text-center display-4 mb-5">Педагогический коллектив</h1>
+
+            {% for category in categories %}
+                {% if category.teachers.exists %}
+                    <h2 class="newsHead">{{ category.name }}</h2>
+                    
+                    <div class="teachers-grid">
+                        {% for teacher in category.teachers.all %}
+                            <div class="lake">
+                                {% if teacher.photo %}
+                                    <img src="{{ teacher.photo.url }}" class="lac" alt="{{ teacher.full_name }}">
+                                {% else %}
+                                    <img src="{% static 'pics/no_photo.jpg' %}" class="lac" alt="Нет фото">
+                                {% endif %}
+                                
+                                <div class="teacher-overlay">
+                                    <div class="teacher-name">{{ teacher.full_name }}</div>
+                                    <div class="teacher-post">{{ teacher.position }}</div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% empty %}
+                <p class="text-center text-muted">Список учителей пока пуст.</p>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}

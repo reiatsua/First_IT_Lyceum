@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import News, Page, Appeal, BookAnniversary
+from .models import News, Page, Appeal, BookAnniversary, TeacherCategory, Teacher
 
 @admin.register(News)
 class NewsAdmin(admin.ModelAdmin):
@@ -22,3 +22,19 @@ class AppealAdmin(admin.ModelAdmin):
 class BookAnniversaryAdmin(admin.ModelAdmin):
     list_display = ('anniversary_years', 'author', 'writing_year')
     search_fields = ('author', 'description')
+
+@admin.register(TeacherCategory)
+class TeacherCategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'order')
+    list_editable = ('order',) # Позволяет менять порядок прямо в списке, не заходя внутрь
+
+@admin.register(Teacher)
+class TeacherAdmin(admin.ModelAdmin):
+    # Что видим в общем списке
+    list_display = ('full_name', 'category', 'position', 'order')
+    # По каким полям можем искать
+    search_fields = ('full_name', 'position')
+    # Фильтр справа (очень удобно: нажал "Администрация" — и видишь только их)
+    list_filter = ('category',)
+    # Позволяет быстро менять порядок учителей внутри категории
+    list_editable = ('order',)

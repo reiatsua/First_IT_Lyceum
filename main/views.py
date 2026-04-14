@@ -6,7 +6,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import News, Page, Appeal, BookAnniversary, SiteSettings
+from .models import News, Page, Appeal, BookAnniversary, SiteSettings, TeacherCategory
 
 from .forms import AppealForm
 
@@ -103,3 +103,7 @@ def update_reception_id(request):
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=400)
     return JsonResponse({"error": "Разрешен только POST-запрос"}, status=405)
+
+def teachers_list(request):
+    categories = TeacherCategory.objects.prefetch_related('teachers').all()
+    return render(request, 'teachers.html', {'categories': categories})
