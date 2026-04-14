@@ -27,6 +27,8 @@ def page_detail(request, slug):
     elif slug == 'books-jubilee':
         books = BookAnniversary.objects.all() # Вытягиваем книги из базы
         return render(request, 'books_jubilee.html', {'books': books})
+    elif slug == 'simvolika':
+        return render(request, 'symbols_lyceum.html')
     page = get_object_or_404(Page, slug=slug)
     return render(request, 'page.html', {'page': page})
 
