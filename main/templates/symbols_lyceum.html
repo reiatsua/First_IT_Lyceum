@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Символика лицея - Первый лицей</title>
+    <style>
+        /* Основные стили страницы */
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333; /* Темно-серый цвет текста */
+            background-color: #f4f7f6; /* Светло-серый фон страницы */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Контейнер для всего контента */
+        .main-container {
+            max-width: 800px;
+            width: 100%;
+            background-color: #ffffff; /* Белый фон контента */
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Легкая тень */
+        }
+
+        /* Общие стили для заголовков */
+        h1, h2 {
+            color: #4a4a4a; /* Глубокий серый для заголовков */
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-top: 0;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-top: 30px;
+        }
+
+        /* Стили для секций (Флаг, Герб, Гимн) */
+        .section {
+            margin-bottom: 30px;
+            text-align: center; /* Центрируем контент в секции */
+        }
+
+        /* Стили для изображений флага и герба */
+        .symbol-img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        /* Стили для текста описания */
+        .description-text {
+            font-size: 1.1em;
+            text-align: left;
+            margin: 0 auto;
+            max-width: 90%;
+            line-height: 1.7;
+        }
+
+        /* Стили для секции гимна */
+        .anthem-header {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .author-info {
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .author-info strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Стили для текста гимна */
+        .anthem-lyrics {
+            text-align: left;
+            margin: 0 auto;
+            max-width: 90%;
+            font-size: 1.05em;
+            line-height: 1.6;
+        }
+
+        .anthem-strophe {
+            margin-bottom: 15px;
+        }
+
+        .anthem-line {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        /* Стили для рефрена (припева) */
+        .anthem-refrain {
+            font-style: italic;
+            margin: 20px 0;
+            padding-left: 20px;
+            border-left: 3px solid #ddd;
+        }
+
+        /* Стили для футера */
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.9em;
+            color: #777;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-container">
+
+    <header>
+        <h1>Символика лицея</h1>
+    </header>
+
+    <main>
+
+        <section class="section">
+            <h2>Флаг лицея</h2>
+            <img src="static/pics/flag_lyceum.jpg" alt="Флаг Первого лицея" class="symbol-img" width="300">
+            <div class="description-text">
+                Флаг двухцветный. Голубой цвет как часть государственного флага, фиолетовый цвет как символ мирового интеллекта. Звезды как символ дерзаний, озаренья, мечты.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Эмблема лицея</h2>
+            <img src="static/pics/gerb_lyceum.jpg" alt="Герб (Эмблема) Первого лицея" class="symbol-img" width="120">
+            <div class="description-text">
+                Спираль как символ бесконечного развития, мудрости, познания, вечности.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Гимн Первого лицея</h2>
+            
+            <div class="anthem-header">
+                <p class="author-info"><strong>Музыка Т. Лесных</strong></p>
+                <p class="author-info"><strong>Слова А. Курлени</strong></p>
+            </div>
+
+            <div class="anthem-lyrics">
+                <div class="anthem-strophe">
+                    <span class="anthem-line">Дом дружбы, обитель крылатой мечты,</span>
+                    <span class="anthem-line">Храм мудрости, чести и знаний,</span>
+                    <span class="anthem-line">Для нас стал навеки святынею ты,</span>
+                    <span class="anthem-line">Лицей – символ наших дерзаний.</span>
+                </div>
+
+                <div class="anthem-strophe anthem-refrain">
+                    <span class="anthem-line">Живи, процветая, любимый лицей.</span>
+                    <span class="anthem-line">У нас с тобой общая светлая цель:</span>
+                    <span class="anthem-line">Достойно нести через годы</span>
+                    <span class="anthem-line">Свет знаний, добра и свободы!</span>
+                </div>
+
+                <div class="anthem-strophe">
+                    <span class="anthem-line">Лицейское братство - традиции оплот,</span>
+                    <span class="anthem-line">Живительный дух поколений.</span>
+                    <span class="anthem-line">Мы к звездным высотам свершаем полет</span>
+                    <span class="anthem-line">Под флагом единства стремлений.</span>
+                </div>
+
+                <div class="anthem-strophe anthem-refrain">
+                    <span class="anthem-line">Живи, процветая, любимый лицей.</span>
+                    <span class="anthem-line">У нас с тобой общая светлая цель:</span>
+                    <span class="anthem-line">Достойно нести через годы</span>
+                    <span class="anthem-line">Свет знаний, добра и свободы!</span>
+                </div>
+
+                <div class="anthem-strophe">
+                    <span class="anthem-line">Ты - взрослым и детям отеческий дом,</span>
+                    <span class="anthem-line">Нам данный счастливой судьбою,</span>
+                    <span class="anthem-line">И, славя тебя вдохновенным трудом,</span>
+                    <span class="anthem-line">Лицей, мы гордимся тобою!</span>
+                </div>
+
+                <div class="anthem-strophe anthem-refrain">
+                    <span class="anthem-line">Живи, процветая, любимый лицей.</span>
+                    <span class="anthem-line">У нас с тобой общая светлая цель:</span>
+                    <span class="anthem-line">Достойно нести через годы</span>
+                    <span class="anthem-line">Свет знаний, добра и свободы!</span>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© Первый лицей, 2023. Все права защищены.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
