@@ -23,14 +23,46 @@ def register_view(request):
 
 def login_view(request):
     if request.method == 'POST':
-        form = UserLoginForm(data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('home')
+        # Вытаскиваем данные напрямую из запроса (поле в HTML может называться email или username)
+        login_input = request.POST.get('email') or request.POST.get('username')
+        password_input = request.POST.get('password')
+
+        if login_input and password_input:
+            user_obj = None
+            
+            # Шаг 1: Пытаемся найти пользователя по почте
+            try:
+                user_obj = CustomUser.objects.get(email=login_input)
+            except CustomUser.DoesNotExist:
+                # Если по почте не нашли, даем шанс зайти по логину (вдруг кто-то введет admin812)
+                try:
+                    user_obj = CustomUser.objects.get(username=login_input)
+                except CustomUser.DoesNotExist:
+                    pass
+
+            # Шаг 2: Если человек найден, проверяем пароль
+            if user_obj:
+                user = authenticate(request, username=user_obj.username, password=password_input)
+                if user is not None:
+                    login(request, user)
+                    return redirect('home')
+                else:
+                    # Пользователь есть, но пароль не тот
+                    messages.error(request, 'Неверный пароль. Попробуйте еще раз.')
+            else:
+                # Пользователя с такой почтой нет в базе
+                messages.error(request, 'Пользователь с такими данными не найден.')
+        else:
+            messages.error(request, 'Пожалуйста, заполните все поля.')
+
+        # Если дошли сюда, значит была ошибка входа. Возвращаем форму обратно.
+        form = UserLoginForm(request.POST)
+        return render(request, 'users/login.html', {'form': form})
+        
     else:
+        # Это GET-запрос (просто открыли страницу)
         form = UserLoginForm()
-    return render(request, 'users/login.html', {'form': form})
+        return render(request, 'users/login.html', {'form': form})
 
 @login_required
 def profile_view(request):
