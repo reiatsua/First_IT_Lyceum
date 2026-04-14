@@ -32,8 +32,10 @@ def page_detail(request, slug):
     elif slug == 'weather-cancel':
         return render(request, 'weather_cancel.html')
     elif slug == 'teachers':
-        teachers = Teacher.objects.all()
-        return render(request, 'teachers.html', {'teachers': teachers})
+        categories = TeacherCategory.objects.prefetch_related('teachers').all()
+    
+    # 3. Передаем в шаблон именно переменную 'categories'
+        return render(request, 'teachers.html', {'categories': categories})
     page = get_object_or_404(Page, slug=slug)
     return render(request, 'page.html', {'page': page})
 
