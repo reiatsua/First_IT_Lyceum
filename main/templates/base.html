@@ -20,11 +20,11 @@
         
         body {
             padding-top: 130px; 
-            /* Слегка приглушенный фон, чтобы белый контейнер "сиял" */
+            /* Приглушенный фон, чтобы контент выделялся */
             background-color: #f0f2f5; 
         }
 
-        /* Базовые настройки для всех экранов */
+        /* --- Настройки широкого светлого контейнера --- */
         main.container {
             background-color: #ffffff;
             border-radius: 1.5rem;
@@ -34,39 +34,51 @@
             box-shadow: 0 15px 45px rgba(0, 0, 0, 0.05);
             border: 1px solid rgba(0, 0, 0, 0.03);
             min-height: 80vh;
-            
-            /* Плавное изменение ширины при ресайзе */
             transition: max-width 0.3s ease; 
         }
 
-        /* Расширяем контейнер на больших мониторах */
         @media (min-width: 1200px) {
-            main.container {
-                /* Было 1000px, стало 1300px */
-                max-width: 1300px !important; 
-            }
+            main.container { max-width: 1300px !important; }
         }
 
-        /* На огромных мониторах можно дать еще чуть больше места */
         @media (min-width: 1600px) {
-            main.container {
-                max-width: 1450px !important;
-            }
+            main.container { max-width: 1450px !important; }
         }
 
-        .hover-shadow:hover {
-            box-shadow: 0 4px 8px rgba(0,0,0,0.15) !important;
-            background-color: #f1f8ff !important;
+        /* --- Мобильная кнопка профиля (FAB) --- */
+        #mobile-profile-fab {
+            position: fixed;
+            bottom: 30px;
+            right: 20px;
+            z-index: 1040;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
         }
-        .transition { transition: all 0.2s ease-in-out; }
 
-        /* --- Оригинальные стили навигации --- */
-        .school-nav {
-            scrollbar-width: none; 
-            -ms-overflow-style: none;
+        .fab-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(13, 110, 253, 0.3);
+            background-color: #0d6efd;
+            color: white;
+            text-decoration: none;
+            border: none;
         }
+
+        /* Скрытие элементов в зависимости от устройства */
+        @media (max-width: 991px) {
+            body { padding-top: 85px; }
+            .desktop-profile { display: none !important; }
+        }
+        @media (min-width: 992px) {
+            #mobile-profile-fab { display: none !important; }
+        }
+
+        /* Оригинальная навигация */
         .school-nav::-webkit-scrollbar { display: none; }
-        
         .school-nav .nav-link {
             color: #495057;
             font-weight: 500;
@@ -75,15 +87,9 @@
             transition: all 0.2s;
             white-space: nowrap;
         }
-        
-        .school-nav .nav-link:hover {
-            background-color: #e9ecef;
-            color: #0d6efd;
-        }
-
+        .school-nav .nav-link:hover { background-color: #e9ecef; color: #0d6efd; }
         .school-nav .dropdown-toggle::after { display: none !important; }
 
-        /* Выпадающее меню при наведении (Десктоп) */
         @media (min-width: 992px) {
             .school-nav { overflow: visible !important; }
             .hover-dropdown:hover .dropdown-menu {
@@ -98,32 +104,16 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        .dropdown-menu {
-            border-radius: 1rem;
-            border: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
-        /* Оформление Offcanvas (мобильное меню) */
+        .dropdown-menu { border-radius: 1rem; border: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         .offcanvas { width: 300px !important; }
-        .mobile-nav-link {
-            font-weight: 600;
-            color: #1e293b;
-            padding: 12px 15px !important;
-            border-radius: 10px;
-        }
-        .mobile-dropdown-menu {
-            border-left: 3px solid #0d6efd;
-            margin-left: 20px;
-            background: #f8f9fa;
-        }
+        .mobile-nav-link { font-weight: 600; color: #1e293b; padding: 12px 15px !important; }
+        .mobile-dropdown-menu { border-left: 3px solid #0d6efd; margin-left: 20px; background: #f8f9fa; }
     </style>
 </head>
 <body>
 
     <header id="main-header">
         <div class="container py-2 position-relative d-flex align-items-center">
-            
             <button class="navbar-toggler d-lg-none btn btn-light rounded-circle shadow-sm" 
                     type="button" data-bs-toggle="offcanvas" data-bs-target="#mobileMenu" style="z-index: 10;">
                 <i class="bi bi-list fs-3"></i>
@@ -137,19 +127,17 @@
                 </a>
             </div>
             
-            <div class="ms-auto position-relative" style="z-index: 5;">
+            <div class="ms-auto position-relative desktop-profile" style="z-index: 5;">
                 {% if user.is_authenticated %}
-                    <a href="{% url 'profile' %}" class="d-flex align-items-center text-decoration-none border rounded-pill py-1 px-3 bg-white shadow-sm hover-shadow transition">
+                    <a href="{% url 'profile' %}" class="d-flex align-items-center text-decoration-none border rounded-pill py-1 px-3 bg-white shadow-sm transition hover-shadow">
                         {% if user.avatar %}
-                            <img src="{{ user.avatar.url }}" alt="Аватар" width="35" height="35" class="rounded-circle me-2" style="object-fit: cover;">
+                            <img src="{{ user.avatar.url }}" width="35" height="35" class="rounded-circle me-2" style="object-fit: cover;">
                         {% else %}
                             <div class="rounded-circle bg-primary text-white d-flex justify-content-center align-items-center me-2" style="width: 35px; height: 35px; font-weight: bold; font-size: 0.9rem;">
                                 {{ user.first_name|first|upper }}
                             </div>
                         {% endif %}
-                        <span class="text-dark fw-medium d-none d-sm-inline">
-                            {{ user.first_name }}
-                        </span>
+                        <span class="text-dark fw-medium d-none d-sm-inline">{{ user.first_name }}</span>
                     </a>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn btn-primary px-4 rounded-pill">Войти</a>
@@ -160,51 +148,57 @@
         <div class="bg-white border-top d-none d-lg-block">
             <div class="container">
                 <nav class="nav nav-pills school-nav flex-nowrap overflow-auto py-2 justify-content-center">
-                    
                     <div class="nav-item dropdown hover-dropdown">
-                        <a class="nav-link dropdown-toggle rounded-pill" href="#" role="button">🏛 Музей</a>
+                        <a class="nav-link dropdown-toggle rounded-pill" href="#">🏛 Музей</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'mudryj-uchitel' %}">Мудрый и добрый учитель...</a></li>
                             <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'nemnogo-istorii' %}">Немного истории</a></li>
                             <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'our-pride' %}">Наша гордость</a></li>
                         </ul>
                     </div>
-
                     <div class="nav-item dropdown hover-dropdown">
-                        <a class="nav-link dropdown-toggle rounded-pill" href="#" role="button">📚 Библиотека</a>
+                        <a class="nav-link dropdown-toggle rounded-pill" href="#">📚 Библиотека</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'bibliotechnaya-dokumentaciya' %}">Библиотечная документация</a></li>
                             <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'books-jubilee' %}">Книги юбиляры</a></li>
                         </ul>
                     </div>
-
                     <div class="nav-item dropdown hover-dropdown">
-                        <a class="nav-link dropdown-toggle rounded-pill" href="#" role="button">ℹ️ Информация</a>
+                        <a class="nav-link dropdown-toggle rounded-pill" href="#">ℹ️ Информация</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'simvolika' %}">Символика лицея</a></li>
                             <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'weather-cancel' %}">Об отмене занятий</a></li>
                         </ul>
                     </div>
-
                     <div class="nav-item dropdown hover-dropdown">
-                        <a class="nav-link dropdown-toggle rounded-pill" href="#" role="button">🎓 Учебный кабинет</a>
+                        <a class="nav-link dropdown-toggle rounded-pill" href="#">🎓 Учебный кабинет</a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'teachers' %}">Наши педагоги</a></li>
-                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'psychology' %}">Социально-психологическая служба</a></li>
+                            <li><a class="dropdown-item py-2" href="{% url 'page_detail' 'psychology' %}">Психолог</a></li>
                         </ul>
                     </div>
-
-                    <div class="nav-item">
-                        <a class="nav-link rounded-pill" href="{% url 'virtual_reception' %}">💻 Виртуальная приемная</a>
-                    </div>
-                    
-                    <div class="nav-item">
-                        <a class="nav-link rounded-pill" href="{% url 'page_detail' 'contacts' %}">📞 Контакты</a>
-                    </div>
+                    <a class="nav-link rounded-pill" href="{% url 'virtual_reception' %}">💻 Виртуальная приемная</a>
+                    <a class="nav-link rounded-pill" href="{% url 'page_detail' 'contacts' %}">📞 Контакты</a>
                 </nav>
             </div>
         </div>
     </header>
+
+    <div id="mobile-profile-fab">
+        {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="fab-btn">
+                {% if user.avatar %}
+                    <img src="{{ user.avatar.url }}" width="60" height="60" class="rounded-circle shadow-lg" style="object-fit: cover;">
+                {% else %}
+                    <span class="fs-4 fw-bold">{{ user.first_name|first|upper }}</span>
+                {% endif %}
+            </a>
+        {% else %}
+            <a href="{% url 'login' %}" class="fab-btn shadow-lg">
+                <i class="bi bi-person-fill fs-2"></i>
+            </a>
+        {% endif %}
+    </div>
 
     <div class="offcanvas offcanvas-start" tabindex="-1" id="mobileMenu">
         <div class="offcanvas-header border-bottom">
@@ -213,51 +207,18 @@
         </div>
         <div class="offcanvas-body p-0">
             <div class="list-group list-group-flush">
-                
                 <div class="list-group-item border-0 p-0">
-                    <a class="nav-link mobile-nav-link dropdown-toggle px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subMuseum">
+                    <a class="nav-link mobile-nav-link px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subMuseum">
                         🏛 Музей <i class="bi bi-chevron-down"></i>
                     </a>
                     <div class="collapse mobile-dropdown-menu" id="subMuseum">
-                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'mudryj-uchitel' %}">Мудрый учитель...</a>
-                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'nemnogo-istorii' %}">Немного истории</a>
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'mudryj-uchitel' %}">Учитель...</a>
+                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'nemnogo-istorii' %}">История</a>
                         <a class="dropdown-item p-3" href="{% url 'page_detail' 'our-pride' %}">Наша гордость</a>
                     </div>
                 </div>
-
-                <div class="list-group-item border-0 p-0">
-                    <a class="nav-link mobile-nav-link dropdown-toggle px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subLib">
-                        📚 Библиотека <i class="bi bi-chevron-down"></i>
-                    </a>
-                    <div class="collapse mobile-dropdown-menu" id="subLib">
-                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'bibliotechnaya-dokumentaciya' %}">Документация</a>
-                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'books-jubilee' %}">Книги юбиляры</a>
-                    </div>
-                </div>
-
-                <div class="list-group-item border-0 p-0">
-                    <a class="nav-link mobile-nav-link dropdown-toggle px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subInfo">
-                        ℹ️ Информация <i class="bi bi-chevron-down"></i>
-                    </a>
-                    <div class="collapse mobile-dropdown-menu" id="subInfo">
-                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'simvolika' %}">Символика лицея</a>
-                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'weather-cancel' %}">Отмена занятий</a>
-                    </div>
-                </div>
-
-                <div class="list-group-item border-0 p-0">
-                    <a class="nav-link mobile-nav-link dropdown-toggle px-3 d-flex justify-content-between" data-bs-toggle="collapse" href="#subKab">
-                        🎓 Учебный кабинет <i class="bi bi-chevron-down"></i>
-                    </a>
-                    <div class="collapse mobile-dropdown-menu" id="subKab">
-                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'teachers' %}">Наши педагоги</a>
-                        <a class="dropdown-item p-3" href="{% url 'page_detail' 'psychology' %}">Психолог</a>
-                    </div>
-                </div>
-
-                <a href="{% url 'virtual_reception' %}" class="list-group-item list-group-item-action py-3 border-0 px-3 fw-bold">💻 Виртуальная приемная</a>
-                <a href="{% url 'page_detail' 'contacts' %}" class="list-group-item list-group-item-action py-3 border-0 px-3 fw-bold">📞 Контакты</a>
-
+                <a href="{% url 'virtual_reception' %}" class="list-group-item list-group-item-action py-3 px-3 fw-bold border-0">💻 Виртуальная приемная</a>
+                <a href="{% url 'page_detail' 'contacts' %}" class="list-group-item list-group-item-action py-3 px-3 fw-bold border-0">📞 Контакты</a>
             </div>
         </div>
     </div>
@@ -270,12 +231,25 @@
     <script>
         let lastScrollTop = 0;
         const header = document.getElementById("main-header");
+        const mobileFab = document.getElementById("mobile-profile-fab");
+
         window.addEventListener("scroll", function() {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
             if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Прячем всё при скролле вниз
                 header.style.transform = "translateY(-100%)"; 
+                if (mobileFab) {
+                    mobileFab.style.transform = "translateY(150%)";
+                    mobileFab.style.opacity = "0";
+                }
             } else {
+                // Показываем при скролле вверх
                 header.style.transform = "translateY(0)";
+                if (mobileFab) {
+                    mobileFab.style.transform = "translateY(0)";
+                    mobileFab.style.opacity = "1";
+                }
             }
             lastScrollTop = scrollTop;
         });
