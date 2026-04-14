@@ -6,6 +6,8 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+CSRF_TRUSTED_ORIGINS = [os.getenv('CSRF_TRUSTED_ORIGIN', 'https://firstitlyceum-production.up.railway.app')]
+
 BOT_SECRET_KEY = os.getenv('BOT_SECRET_KEY', 'default-local-key')
 
 RECEPTION_BOT_TOKEN = os.getenv('RECEPTION_BOT_TOKEN')
