@@ -1,5 +1,3 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -21,22 +19,8 @@
         
         /* Увеличили отступ, так как шапка стала выше */
         body {
-            background-image: url("{% static 'pics/spiral.jpg' %}");
-        
-        /* Чтобы картинка не двигалась при скролле */
-            background-attachment: fixed;
-            
-            /* Чтобы картинка растягивалась на весь экран без искажений */
-            background-size: cover;
-            
-            /* Центрируем фон */
-            background-position: center;
-            
-            /* Цвет фона на случай, если картинка долго грузится */
+            padding-top: 130px; 
             background-color: #f8f9fa;
-            
-            /* Чтобы фон не повторялся, если картинка маленькая */
-            background-repeat: no-repeat;
         }
 
         .hover-shadow:hover {
