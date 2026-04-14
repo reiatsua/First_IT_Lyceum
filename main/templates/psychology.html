@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+    .psy-container { padding-bottom: 5rem; }
+    
+    /* Твой фирменный стиль заголовка */
+    .memorial-header {
+        border-left: 5px solid #0d6efd;
+        padding-left: 20px;
+        margin-top: 2rem;
+    }
+
+    /* Стили для карточек (как в истории/книгах) */
+    .info-card {
+        border: none;
+        border-radius: 1.2rem;
+        background: #ffffff;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        border-top: 4px solid #0d6efd;
+        height: 100%;
+    }
+
+    /* Акцент на важную информацию (Телефон доверия) */
+    .hotline-box {
+        background: linear-gradient(135deg, #0d6efd 0%, #004aad 100%);
+        color: white;
+        padding: 2.5rem;
+        border-radius: 1.5rem;
+        text-align: center;
+        margin-top: 3rem;
+        box-shadow: 0 10px 30px rgba(13, 110, 253, 0.2);
+    }
+
+    /* Таблица в твоем стиле */
+    .psy-table {
+        background: white;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+    .psy-table thead { background-color: #0d6efd; color: white; }
+    
+    .section-title {
+        position: relative;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+        margin-top: 4rem;
+        font-weight: 800;
+        color: #212529;
+    }
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 80px;
+        height: 5px;
+        background: #0d6efd;
+        border-radius: 3px;
+    }
+
+    .badge-service {
+        background-color: #f1f5f9;
+        color: #0d6efd;
+        padding: 8px 16px;
+        border-radius: 50px;
+        font-weight: 600;
+        display: inline-block;
+        margin: 5px;
+        border: 1px solid #e2e8f0;
+    }
+</style>
+
+<div class="container psy-container">
+    <div class="row justify-content-center">
+        <div class="col-lg-11">
+            
+            <div class="memorial-header mb-5">
+                <h1 class="fw-bold text-primary display-4 mb-2">Социально-психологическая служба</h1>
+                <p class="text-muted fs-5">Поддержка, развитие и помощь в любой ситуации</p>
+            </div>
+
+            <div class="card info-card p-4 mb-5">
+                <h3 class="fw-bold text-dark mb-3">Уважаемые учащиеся, родители и педагоги!</h3>
+                <p class="fs-5 text-secondary lead">Службой лицея проводятся индивидуальные консультации по интересующим Вас проблемам в <strong>очном и дистанционном формате</strong>. Вы можете прийти лично или направить вопросы на электронные адреса в любое удобное время.</p>
+                <p class="text-muted mb-0"><i class="bi bi-info-circle me-2"></i>Ответы будут отправлены по электронной почте в указанное время консультаций. Онлайн-встречи — по взаимной договоренности.</p>
+            </div>
+
+            <h2 class="section-title">График консультаций на 2025-2026 уч. год</h2>
+            <div class="table-responsive psy-table mb-5">
+                <table class="table table-hover mb-0">
+                    <thead>
+                        <tr>
+                            <th class="py-3 px-4">Классы</th>
+                            <th class="py-3">Ф.И.О. педагога</th>
+                            <th class="py-3">Дни и время</th>
+                            <th class="py-3 text-center">Электронная почта</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="px-4 fw-bold">Начальное звено (КПП - 4)</td>
+                            <td>Ендуткина Виктория Викторовна</td>
+                            <td>Среда: 9.00 - 12.00</td>
+                            <td class="text-center"><a href="mailto:vikkialbert@mail.ru" class="btn btn-sm btn-outline-primary rounded-pill">vikkialbert@mail.ru</a></td>
+                        </tr>
+                        <tr>
+                            <td class="px-4 fw-bold">КПП - 11 классы</td>
+                            <td>Касымова Салтанат Еркеновна <br><small class="text-muted">социальный педагог</small></td>
+                            <td>Вторник: 15.00 - 17.00</td>
+                            <td class="text-center"><a href="mailto:salta_17-94@mail.ru" class="btn btn-sm btn-outline-primary rounded-pill">salta_17-94@mail.ru</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row g-4 mb-5">
+                <div class="col-md-6">
+                    <h2 class="section-title mt-0">Наша цель</h2>
+                    <p class="fs-5 text-secondary">Создание социально-психологических условий для развития личности учащихся, их успешного обучения и формирования устойчивой мотивации к познанию.</p>
+                </div>
+                <div class="col-md-6">
+                    <h2 class="section-title mt-0">Направления работы</h2>
+                    <div class="d-flex flex-wrap">
+                        <span class="badge-service">Психодиагностика</span>
+                        <span class="badge-service">Консультирование</span>
+                        <span class="badge-service">Профилактика</span>
+                        <span class="badge-service">Коррекция</span>
+                        <span class="badge-service">Социальная помощь</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hotline-box">
+                <h2 class="fw-bold mb-3">Единый телефон доверия: 8-800-080-81-50</h2>
+                <p class="fs-5 mb-4">Вас всегда готовы выслушать и помочь найти выход. Анонимно и бесплатно.</p>
+                <div class="row justify-content-center text-start">
+                    <div class="col-md-10 opacity-75 small border-top pt-3">
+                        В современном мире каждый может столкнуться со стрессом. Если вам кажется, что не с кем поделиться проблемой — просто позвоните. Помните: выход есть из любой ситуации.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}
