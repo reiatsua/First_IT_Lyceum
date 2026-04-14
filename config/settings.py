@@ -6,6 +6,8 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+BOT_SECRET_KEY = os.getenv('BOT_SECRET_KEY', 'default-local-key')
+
 RECEPTION_BOT_TOKEN = os.getenv('RECEPTION_BOT_TOKEN')
 
 _rel_path = os.getenv('RECEPTION_FILE_PATH', '../reception_bot/admin_chat_id.txt')
@@ -30,6 +32,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',

@@ -55,3 +55,13 @@ class BookAnniversary(models.Model):
 
     def __str__(self):
         return f"{self.author} — {self.anniversary_years}"
+    
+class SiteSettings(models.Model):
+    reception_chat_id = models.CharField("ID чата приемной", max_length=100, blank=True, null=True)
+
+    class Meta:
+        verbose_name = "Настройка сайта"
+        verbose_name_plural = "Настройки сайта"
+        
+    def __str__(self):
+        return "Настройки системы"
