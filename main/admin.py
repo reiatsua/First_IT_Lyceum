@@ -12,10 +12,8 @@ class PageAdmin(admin.ModelAdmin):
 
 @admin.register(Appeal)
 class AppealAdmin(admin.ModelAdmin):
-    # Убрали 'subject', добавили 'name' и 'email'
     list_display = ('name', 'email', 'created_at', 'is_processed')
     list_filter = ('is_processed', 'created_at')
-    # В поиске тоже заменили 'subject' на 'email'
     search_fields = ('name', 'email', 'message')
 
 @admin.register(BookAnniversary)
@@ -30,11 +28,7 @@ class TeacherCategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    # Что видим в общем списке
     list_display = ('full_name', 'category', 'position', 'order')
-    # По каким полям можем искать
     search_fields = ('full_name', 'position')
-    # Фильтр справа (очень удобно: нажал "Администрация" — и видишь только их)
     list_filter = ('category',)
-    # Позволяет быстро менять порядок учителей внутри категории
     list_editable = ('order',)

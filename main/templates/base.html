@@ -279,14 +279,12 @@
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
             if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Прячем всё при скролле вниз
                 header.style.transform = "translateY(-100%)"; 
                 if (mobileFab) {
                     mobileFab.style.transform = "translateY(150%)";
                     mobileFab.style.opacity = "0";
                 }
             } else {
-                // Показываем при скролле вверх
                 header.style.transform = "translateY(0)";
                 if (mobileFab) {
                     mobileFab.style.transform = "translateY(0)";

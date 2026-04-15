@@ -23,7 +23,6 @@ class UserRegisterForm(UserCreationForm):
     )
     iin = forms.CharField(label='ИИН', required=False)
 
-    # Новые поля для учеников с нужными виджетами
     grade_number = forms.ChoiceField(
         label='Класс', 
         choices=[('', 'Выберите класс...')] + CustomUser.GRADE_CHOICES, 
@@ -70,7 +69,6 @@ class UserRegisterForm(UserCreationForm):
                 
         return cleaned_data
 
-    # ... метод clean_password1 остается без изменений ...
 
     def clean_password1(self):
         password = self.cleaned_data.get('password1')
